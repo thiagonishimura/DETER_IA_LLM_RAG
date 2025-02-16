@@ -1,0 +1,54 @@
+primary_agent:
+  llm: gpt-4o-mini # Define o modelo de linguagem (LLM) a ser usado
+  llm_temperature: 0.0  # Define a temperatura do modelo (0 = determinístico, sem aleatoriedade)
+
+swiss_airline_policy_rag:
+  unstructured_docs: "data/unstructured_docs/swiss_airline_policy"  # Caminho para documentos não estruturados
+  vectordb: "data/airline_policy_vectordb"  # Banco de dados vetorial para armazenar embeddings
+  collection_name: rag-chroma  # Nome da coleção no banco de vetores
+  llm: gpt-4o-mini
+  llm_temperature: 0.0
+  embedding_model: text-embedding-3-small  # Modelo de embeddings usado para indexação
+  chunk_size: 500  # Tamanho dos pedaços dos documentos
+  chunk_overlap: 100  # Sobreposição entre os pedaços
+  k: 2  # Número de documentos relevantes a serem recuperados
+
+stories_rag:
+  unstructured_docs: "data/unstructured_docs/stories"  # Caminho para documentos não estruturados
+  vectordb: "data/stories_vectordb"  # Banco de dados vetorial para armazenar embeddings
+  collection_name: stories-rag-chroma  # Nome da coleção no banco de vetores
+  llm: gpt-4o-mini
+  llm_temperature: 0.0
+  embedding_model: text-embedding-3-small  # Modelo de embeddings usado para indexação
+  chunk_size: 500  # Tamanho dos pedaços dos documentos
+  chunk_overlap: 100  # Sobreposição entre os pedaços
+  k: 2 # Número de documentos relevantes a serem recuperados
+
+travel_sqlagent_configs:
+  travel_sqldb_dir: "data/travel.sqlite"  # Caminho para o banco de dados SQLite de viagens
+  llm: "gpt-3.5-turbo"  # Modelo de linguagem usado para gerar consultas SQL
+  llm_temperature: 0.0  # Determinismo total (respostas consistentes)
+  
+chinook_sqlagent_configs:
+  chinook_sqldb_dir: "data/Chinook.db"  # Caminho para o banco de dados SQLite Chinook (exemplo de música)
+  llm: "gpt-3.5-turbo"
+  llm_temperature: 0.0
+
+langsmith:
+  tracing: "true"  # Habilita rastreamento
+  project_name: "rag_sqlagent_project"  # Nome do projeto rastreado
+
+tavily_search_api:
+  tavily_search_max_results: 2  # Define o número máximo de resultados de busca a serem retornados
+
+graph_configs:
+  thread_id: 1  # Identifica a sessão do usuário para rastreamento contínuo
+
+# ✅ Esse arquivo tools_config.yml define a configuração de um sistema que:
+
+# 📌 Usa modelos LLM (gpt-4o-mini e gpt-3.5-turbo) para responder perguntas.
+# 📌 Permite buscas em documentos via RAG usando bancos vetoriais.
+# 📌 Converte linguagem natural para SQL e consulta bancos de dados SQLite (Chinook.db, travel.sqlite).
+# 📌 Pode buscar informações externas via Tavily API.
+# 📌 Mantém histórico de interações do usuário para respostas mais contextuais.
+# 💡 O que você precisa fazer agora? Quer ajuda para modificar ou integrar essa configuração ao seu código? 🚀
