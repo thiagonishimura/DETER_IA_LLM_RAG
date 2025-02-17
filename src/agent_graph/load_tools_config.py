@@ -66,6 +66,16 @@ class LoadToolsConfig:
         self.chinook_sqlagent_llm = app_config["chinook_sqlagent_configs"]["llm"]
         self.chinook_sqlagent_llm_temperature = float(
             app_config["chinook_sqlagent_configs"]["llm_temperature"])
+        
+        # PostgreSQL agent configs
+        self.postgres_db_type = app_config["postgres_sqlagent_configs"]["db_type"]
+        self.postgres_db_host = app_config["postgres_sqlagent_configs"]["db_host"]
+        self.postgres_db_port = app_config["postgres_sqlagent_configs"]["db_port"]
+        self.postgres_db_name = app_config["postgres_sqlagent_configs"]["db_name"]
+        self.postgres_db_user = app_config["postgres_sqlagent_configs"]["db_user"]
+        self.postgres_db_password = app_config["postgres_sqlagent_configs"]["db_password"]
+        self.postgres_sqlagent_llm = app_config["postgres_sqlagent_configs"]["llm"]
+        self.postgres_sqlagent_llm_temperature = float(app_config["postgres_sqlagent_configs"]["llm_temperature"])
 
         # Graph configs
         self.thread_id = str(
