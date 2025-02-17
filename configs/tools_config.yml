@@ -44,6 +44,16 @@ tavily_search_api:
 graph_configs:
   thread_id: 1  # Identifica a sessão do usuário para rastreamento contínuo
 
+postgres_sqlagent_configs:
+  db_type: "postgres"
+  db_host: "localhost"
+  db_port: 5432
+  db_name: "amazonia"
+  db_user: "postgres"
+  db_password: "postgres"
+  llm: "text-davinci-003"
+  llm_temperature: 0.7
+
 # ✅ Esse arquivo tools_config.yml define a configuração de um sistema que:
 
 # 📌 Usa modelos LLM (gpt-4o-mini e gpt-3.5-turbo) para responder perguntas.
