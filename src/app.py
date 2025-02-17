@@ -1,14 +1,14 @@
 import gradio as gr
 from chatbot.chatbot_backend import ChatBot
 from utils.ui_settings import UISettings
+from agent_graph.postgres_agent import PostgresAgent
 
+postgres_agent = PostgresAgent()
 
 with gr.Blocks() as demo:
     with gr.Tabs():
         with gr.TabItem("AgentGraph"):
-            ##############
-            # First ROW:
-            ##############
+            # First ROW
             with gr.Row() as row_one:
                 chatbot = gr.Chatbot(
                     [],
@@ -17,13 +17,9 @@ with gr.Blocks() as demo:
                     height=500,
                     avatar_images=(
                         ("images/AI_RT.png"), "images/openai.png"),
-                    # render=False
                 )
-                # **Adding like/dislike icons
                 chatbot.like(UISettings.feedback, None, None)
-            ##############
-            # SECOND ROW:
-            ##############
+            # SECOND ROW
             with gr.Row():
                 input_txt = gr.Textbox(
                     lines=3,
@@ -31,16 +27,11 @@ with gr.Blocks() as demo:
                     placeholder="Enter text and press enter, or upload PDF files",
                     container=False,
                 )
-
-            ##############
-            # Third ROW:
-            ##############
+            # Third ROW
             with gr.Row() as row_two:
                 text_submit_btn = gr.Button(value="Submit text")
                 clear_button = gr.ClearButton([input_txt, chatbot])
-            ##############
-            # Process:
-            ##############
+            # Process
             txt_msg = input_txt.submit(fn=ChatBot.respond,
                                        inputs=[chatbot, input_txt],
                                        outputs=[input_txt,

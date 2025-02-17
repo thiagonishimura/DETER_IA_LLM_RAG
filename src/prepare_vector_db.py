@@ -110,7 +110,7 @@ class PrepareVectorDB:
 
 if __name__ == "__main__":
     load_dotenv()
-    os.environ['OPENAI_API_KEY'] = os.getenv("OPEN_AI_API_KEY")
+    os.environ['OPENAI_API_KEY'] = os.getenv("OPENAI_API_KEY")
 
     with open(here("configs/tools_config.yml")) as cfg:
         app_config = yaml.load(cfg, Loader=yaml.FullLoader)
