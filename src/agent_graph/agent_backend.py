@@ -49,7 +49,7 @@ class BasicToolNode:
         if messages := inputs.get("messages", []):
             message = messages[-1]
         else:
-            raise ValueError("No message found in input")
+            raise ValueError("Nenhuma mensagem encontrada na entrada")
         outputs = []
         for tool_call in message.tool_calls:
             tool_result = self.tools_by_name[tool_call["name"]].invoke(
@@ -91,7 +91,7 @@ def route_tools(
         ai_message = messages[-1]
     else:
         raise ValueError(
-            f"No messages found in input state to tool_edge: {state}")
+            f"Nenhuma mensagem encontrada no estado de entrada para tool_edge: {state}")
     if hasattr(ai_message, "tool_calls") and len(ai_message.tool_calls) > 0:
         return "tools"
     return "__end__"
@@ -116,4 +116,4 @@ def plot_agent_schema(graph):
         display(Image(graph.get_graph().draw_mermaid_png()))
     except Exception:
         # This requires some extra dependencies and is optional
-        return print("Graph could not be displayed.")
+        return print("O gráfico não pôde ser exibido.")

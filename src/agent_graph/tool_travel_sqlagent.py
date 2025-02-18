@@ -14,30 +14,30 @@ TOOLS_CFG = LoadToolsConfig()
 
 class TravelSQLAgentTool:
     """
-    A tool for interacting with a travel-related SQL database using an LLM (Language Model) to generate and execute SQL queries.
+    Uma ferramenta para interagir com um banco de dados SQL relacionado a viagens usando um LLM (Language Model) para gerar e executar consultas SQL.
 
-    This tool enables users to ask travel-related questions, which are transformed into SQL queries by a language model.
-    The SQL queries are executed on the provided SQLite database, and the results are processed by the language model to
-    generate a final answer for the user.
+    Esta ferramenta permite aos usuários fazer perguntas relacionadas a viagens, que são transformadas em consultas SQL por um modelo de linguagem.
+    As consultas SQL são executadas no banco de dados SQLite fornecido e os resultados são processados ​​pelo modelo de linguagem para
+    gerar uma resposta final para o usuário.
 
-    Attributes:
-        sql_agent_llm (ChatOpenAI): An instance of a ChatOpenAI language model used to generate and process SQL queries.
-        system_role (str): A system prompt template that guides the language model in answering user questions based on SQL query results.
-        db (SQLDatabase): An instance of the SQL database used to execute queries.
-        chain (RunnablePassthrough): A chain of operations that creates SQL queries, executes them, and generates a response.
+    Atributos:
+        sql_agent_llm (ChatOpenAI): uma instância de um modelo de linguagem ChatOpenAI usado para gerar e processar consultas SQL.
+        system_role (str): Um modelo de prompt do sistema que orienta o modelo de linguagem na resposta às perguntas do usuário com base nos resultados da consulta SQL.
+        db (SQLDatabase): Uma instância do banco de dados SQL usada para executar consultas.
+        cadeia (RunnablePassthrough): Uma cadeia de operações que cria consultas SQL, as executa e gera uma resposta.
 
-    Methods:
-        __init__: Initializes the TravelSQLAgentTool by setting up the language model, SQL database, and query-answering pipeline.
+    Métodos:
+        __init__: inicializa o TravelSQLAgentTool configurando o modelo de linguagem, o banco de dados SQL e o pipeline de resposta a consultas.
     """
 
     def __init__(self, llm: str, sqldb_directory: str, llm_temerature: float) -> None:
         """
-        Initializes the TravelSQLAgentTool with the necessary configurations.
+        Inicializa o TravelSQLAgentTool com as configurações necessárias.
 
-        Args:
-            llm (str): The name of the language model to be used for generating and interpreting SQL queries.
-            sqldb_directory (str): The directory path where the SQLite database is stored.
-            llm_temerature (float): The temperature setting for the language model, controlling response randomness.
+        Argumentos:
+            llm (str): O nome do modelo de linguagem a ser usado para gerar e interpretar consultas SQL.
+            sqldb_directory (str): O caminho do diretório onde o banco de dados SQLite está armazenado.
+            llm_temerature (float): A configuração de temperatura para o modelo de linguagem, controlando a aleatoriedade da resposta.
         """
         self.sql_agent_llm = ChatOpenAI(
             model=llm, temperature=llm_temerature)
@@ -68,7 +68,7 @@ class TravelSQLAgentTool:
 
 @tool
 def query_travel_sqldb(query: str) -> str:
-    """Query the Swiss Airline SQL Database and access all the company's information. Input should be a search query."""
+    """Consulte o banco de dados SQL da Swiss Airline e acesse todas as informações da empresa. A entrada deve ser uma consulta de pesquisa."""
     agent = TravelSQLAgentTool(
         llm=TOOLS_CFG.travel_sqlagent_llm,
         sqldb_directory=TOOLS_CFG.travel_sqldb_directory,

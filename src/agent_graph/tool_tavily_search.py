@@ -3,14 +3,14 @@ from langchain_community.tools.tavily_search import TavilySearchResults
 
 def load_tavily_search_tool(tavily_search_max_results: int):
     """
-    This function initializes a Tavily search tool, which performs searches and returns results
-    based on user queries. The `max_results` parameter controls how many search results are
-    retrieved for each query.
+    Esta função inicializa uma ferramenta de pesquisa Tavily, que realiza pesquisas e retorna resultados
+    com base nas consultas do usuário. O parâmetro `max_results` controla quantos resultados de pesquisa são
+    recuperado para cada consulta.
 
-    Args:
-        tavily_search_max_results (int): The maximum number of search results to return for each query.
+    Argumentos:
+        tavily_search_max_results (int): O número máximo de resultados de pesquisa a serem retornados para cada consulta.
 
-    Returns:
-        TavilySearchResults: A configured instance of the Tavily search tool with the specified `max_results`.
+    Retorna:
+        TavilySearchResults: uma instância configurada da ferramenta de pesquisa Tavily com os `max_results` especificados.
     """
     return TavilySearchResults(max_results=tavily_search_max_results)

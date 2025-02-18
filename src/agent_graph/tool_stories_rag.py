@@ -8,32 +8,32 @@ TOOLS_CFG = LoadToolsConfig()
 
 class StoriesRAGTool:
     """
-    A tool for retrieving relevant stories using a Retrieval-Augmented Generation (RAG) approach with vector embeddings.
+    Uma ferramenta para recuperar histórias relevantes usando uma abordagem Retrieval-Augmented Generation (RAG) com incorporações de vetores.
 
-    This tool leverages a pre-trained OpenAI embedding model to transform user queries into vector embeddings.
-    It then uses these embeddings to query a Chroma-based vector database to retrieve the top-k most relevant
-    stories from a specific collection stored in the database.
+    Esta ferramenta aproveita um modelo de incorporação OpenAI pré-treinado para transformar as consultas do usuário em incorporações de vetores.
+    Em seguida, ele usa esses embeddings para consultar um banco de dados de vetores baseado em Chroma para recuperar os k mais relevantes
+    histórias de uma coleção específica armazenada no banco de dados.
 
-    Attributes:
-        embedding_model (str): The name of the OpenAI embedding model used for generating vector representations of queries.
-        vectordb_dir (str): The directory where the Chroma vector database is persisted on disk.
-        k (int): The number of top-k nearest neighbor stories to retrieve from the vector database.
-        vectordb (Chroma): The Chroma vector database instance connected to the specified collection and embedding model.
+    Atributos:
+        embedding_model (str): O nome do modelo de incorporação OpenAI usado para gerar representações vetoriais de consultas.
+        vectordb_dir (str): O diretório onde o banco de dados vetorial Chroma é mantido no disco.
+        k (int): O número das k histórias vizinhas mais próximas a serem recuperadas do banco de dados vetorial.
+        vectordb (Chroma): A instância do banco de dados vetorial Chroma conectada à coleção especificada e ao modelo de incorporação.
 
-    Methods:
-        __init__: Initializes the tool with the specified embedding model, vector database, and retrieval parameters.
+    Métodos:
+        __init__: inicializa a ferramenta com o modelo de incorporação, banco de dados vetorial e parâmetros de recuperação especificados.
     """
 
     def __init__(self, embedding_model: str, vectordb_dir: str, k: int, collection_name: str) -> None:
         """
-        Initializes the StoriesRAGTool with the necessary configurations.
+        Inicializa o StoriesRAGTool com as configurações necessárias.
 
-        Args:
-            embedding_model (str): The name of the embedding model (e.g., "text-embedding-ada-002")
-                used to convert queries into vector representations.
-            vectordb_dir (str): The directory path where the Chroma vector database is stored and persisted on disk.
-            k (int): The number of nearest neighbor stories to retrieve based on query similarity.
-            collection_name (str): The name of the collection inside the vector database that holds the relevant stories.
+        Argumentos:
+            embedding_model (str): O nome do modelo de incorporação (por exemplo, "text-embedding-ada-002")
+                usado para converter consultas em representações vetoriais.
+            vectordb_dir (str): O caminho do diretório onde o banco de dados vetorial Chroma é armazenado e persistido no disco.
+            k (int): O número de histórias vizinhas mais próximas a serem recuperadas com base na similaridade da consulta.
+            nome_coleção (str): O nome da coleção dentro do banco de dados vetorial que contém as histórias relevantes.
         """
         self.embedding_model = embedding_model
         self.vectordb_dir = vectordb_dir
@@ -49,7 +49,7 @@ class StoriesRAGTool:
 
 @tool
 def lookup_stories(query: str) -> str:
-    """Search among the fictional stories and find the answer to the query. Input should be the query."""
+    """Pesquise entre as histórias de ficção e encontre a resposta para a pergunta. A entrada deve ser a consulta."""
     rag_tool = StoriesRAGTool(
         embedding_model=TOOLS_CFG.stories_rag_embedding_model,
         vectordb_dir=TOOLS_CFG.stories_rag_vectordb_directory,

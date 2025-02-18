@@ -10,29 +10,29 @@ from dotenv import load_dotenv
 
 class PrepareVectorDB:
     """
-    A class to prepare and manage a Vector Database (VectorDB) using documents from a specified directory.
-    The class performs the following tasks:
-    - Loads and splits documents (PDFs).
-    - Splits the text into chunks based on the specified chunk size and overlap.
-    - Embeds the document chunks using a specified embedding model.
-    - Stores the embedded vectors in a persistent VectorDB directory.
+    Uma classe para preparar e gerenciar um banco de dados vetorial (VectorDB) usando documentos de um diretório especificado.
+    A classe executa as seguintes tarefas:
+    - Carrega e divide documentos (PDFs).
+    - Divide o texto em pedaços com base no tamanho e na sobreposição do pedaço especificado.
+    - Incorpora os pedaços do documento usando um modelo de incorporação especificado.
+    - Armazena os vetores incorporados em um diretório VectorDB persistente.
 
-    Attributes:
-        doc_dir (str): Path to the directory containing documents (PDFs) to be processed.
-        chunk_size (int): The maximum size of each chunk (in characters) into which the document text will be split.
-        chunk_overlap (int): The number of overlapping characters between consecutive chunks.
-        embedding_model (str): The name of the embedding model to be used for generating vector representations of text.
-        vectordb_dir (str): Directory where the resulting vector database will be stored.
-        collection_name (str): The name of the collection to be used within the vector database.
+    Atributos:
+        doc_dir (str): Caminho para o diretório que contém os documentos (PDFs) a serem processados.
+        chunk_size (int): O tamanho máximo de cada pedaço (em caracteres) no qual o texto do documento será dividido.
+        chunk_overlap (int): O número de caracteres sobrepostos entre pedaços consecutivos.
+        embedding_model (str): O nome do modelo de incorporação a ser usado para gerar representações vetoriais de texto.
+        vectordb_dir (str): Diretório onde será armazenado o banco de dados vetorial resultante.
+        nome_coleção (str): O nome da coleção a ser usada no banco de dados vetorial.
 
-    Methods:
-        path_maker(file_name: str, doc_dir: str) -> str:
-            Creates a full file path by joining the given directory and file name.
+    Métodos:
+        path_maker(nome_do_arquivo: str, doc_dir: str) -> str:
+            Cria um caminho de arquivo completo juntando o diretório e o nome de arquivo fornecidos.
 
-        run() -> None:
-            Executes the process of reading documents, splitting text, embedding them into vectors, and 
-            saving the resulting vector database. If the vector database directory already exists, it skips
-            the creation process.
+        executar() -> Nenhum:
+            Executa o processo de leitura de documentos, divisão de texto, incorporação em vetores e 
+            salvando o banco de dados vetorial resultante. Se o diretório do banco de dados vetorial já existir, ele ignora
+            o processo de criação.
     """
 
     def __init__(self,
@@ -53,35 +53,35 @@ class PrepareVectorDB:
 
     def path_maker(self, file_name: str, doc_dir):
         """
-        Creates a full file path by joining the provided directory and file name.
+        Cria um caminho de arquivo completo juntando o diretório e o nome de arquivo fornecidos.
 
-        Args:
-            file_name (str): Name of the file.
-            doc_dir (str): Path of the directory.
+        Argumentos:
+            file_name (str): Nome do arquivo.
+            doc_dir (str): Caminho do diretório.
 
-        Returns:
-            str: Full path of the file.
+        Retorna:
+            str: Caminho completo do arquivo.
         """
         return os.path.join(here(doc_dir), file_name)
 
     def run(self):
         """
-        Executes the main logic to create and store document embeddings in a VectorDB.
+        Executa a lógica principal para criar e armazenar embeddings de documentos em um VectorDB.
 
-        If the vector database directory doesn't exist:
-        - It loads PDF documents from the `doc_dir`, splits them into chunks,
-        - Embeds the document chunks using the specified embedding model,
-        - Stores the embeddings in a persistent VectorDB directory.
+        Se o diretório do banco de dados vetorial não existir:
+        - Carrega documentos PDF do `doc_dir`, divide-os em pedaços,
+        - Incorpora os pedaços do documento usando o modelo de incorporação especificado,
+        - Armazena os embeddings em um diretório VectorDB persistente.
 
-        If the directory already exists, it skips the embedding creation process.
+        Se o diretório já existir, ele ignora o processo de criação da incorporação.
 
-        Prints the creation status and the number of vectors in the vector database.
+        Imprime o status de criação e o número de vetores no banco de dados de vetores.
 
-        Returns:
-            None
+        Retorna:
+            Nenhum
         """
         if not os.path.exists(here(self.vectordb_dir)):
-            # If it doesn't exist, create the directory and create the embeddings
+            # Se não existir, crie o diretório e crie os embeddings
             os.makedirs(here(self.vectordb_dir))
             print(f"Directory '{self.vectordb_dir}' was created.")
 
@@ -94,7 +94,7 @@ class PrepareVectorDB:
                 chunk_size=self.chunk_size, chunk_overlap=self.chunk_overlap
             )
             doc_splits = text_splitter.split_documents(docs_list)
-            # Add to vectorDB
+            # Adicionar ao vetorDB
             vectordb = Chroma.from_documents(
                 documents=doc_splits,
                 collection_name=self.collection_name,
@@ -115,7 +115,7 @@ if __name__ == "__main__":
     with open(here("configs/tools_config.yml")) as cfg:
         app_config = yaml.load(cfg, Loader=yaml.FullLoader)
 
-    # Uncomment the following configs to run for swiss airline policy document
+    # Remova o comentário das seguintes configurações para executar o documento de swiss airline policy
     chunk_size = app_config["swiss_airline_policy_rag"]["chunk_size"]
     chunk_overlap = app_config["swiss_airline_policy_rag"]["chunk_overlap"]
     embedding_model = app_config["swiss_airline_policy_rag"]["embedding_model"]
@@ -133,7 +133,7 @@ if __name__ == "__main__":
 
     prepare_db_instance.run()
 
-    # Uncomment the following configs to run for stories document
+    # Remova o comentário das seguintes configurações para executar o documento de stories
     chunk_size = app_config["stories_rag"]["chunk_size"]
     chunk_overlap = app_config["stories_rag"]["chunk_overlap"]
     embedding_model = app_config["stories_rag"]["embedding_model"]

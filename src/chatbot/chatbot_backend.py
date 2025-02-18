@@ -19,31 +19,31 @@ create_directory("memory")
 
 class ChatBot:
     """
-    A class to handle chatbot interactions by utilizing a pre-defined agent graph. The chatbot processes
-    user messages, generates appropriate responses, and saves the chat history to a specified memory directory.
+    Uma classe para lidar com interações de chatbot utilizando um gráfico de agente predefinido. Os processos do chatbot
+    mensagens do usuário, gera respostas apropriadas e salva o histórico de bate-papo em um diretório de memória especificado.
 
-    Attributes:
-        config (dict): A configuration dictionary that stores specific settings such as the `thread_id`.
+    Atributos:
+        config (dict): Um dicionário de configuração que armazena configurações específicas, como `thread_id`.
 
-    Methods:
-        respond(chatbot: List, message: str) -> Tuple:
-            Processes the user message through the agent graph, generates a response, appends it to the chat history,
-            and writes the chat history to a file.
+    Métodos:
+        responder(chatbot: Lista, mensagem: str) -> Tupla:
+            Processa a mensagem do usuário por meio do gráfico do agente, gera uma resposta, anexa-a ao histórico do chat,
+            e grava o histórico do bate-papo em um arquivo.
     """
     @staticmethod
     def respond(chatbot: List, message: str) -> Tuple:
         """
-        Processes a user message using the agent graph, generates a response, and appends it to the chat history.
-        The chat history is also saved to a memory file for future reference.
+        Processa uma mensagem do usuário usando o gráfico do agente, gera uma resposta e a anexa ao histórico de chat.
+        O histórico do bate-papo também é salvo em um arquivo de memória para referência futura.
 
-        Args:
-            chatbot (List): A list representing the chatbot conversation history. Each entry is a tuple of the user message and the bot response.
-            message (str): The user message to process.
+        Argumentos:
+            chatbot (lista): uma lista que representa o histórico de conversas do chatbot. Cada entrada é uma tupla da mensagem do usuário e da resposta do bot.
+            mensagem (str): A mensagem do usuário a ser processada.
 
-        Returns:
-            Tuple: Returns an empty string (representing the new user input placeholder) and the updated conversation history.
+        Retorna:
+            Tupla: Retorna uma string vazia (representando o novo espaço reservado de entrada do usuário) e o histórico de conversa atualizado.
         """
-        # The config is the **second positional argument** to stream() or invoke()!
+        # A configuração é o **segundo argumento posicional** para stream() ou invocar()!
         events = graph.stream(
             {"messages": [("user", message)]}, config, stream_mode="values"
         )

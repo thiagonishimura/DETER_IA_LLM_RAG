@@ -1,150 +1,149 @@
+---
+
+# AgentGraph: Sistema de perguntas e respostas de agentes SQL inteligentes e RAG para bate-papo com vários bancos de dados
+
+Este projeto demonstra como construir um sistema de agente usando Large Language Models (LLMs) que pode interagir com vários bancos de dados e utilizar várias ferramentas. Ele destaca o uso de agentes SQL para consultar bancos de dados grandes de forma eficiente. As principais estruturas usadas neste projeto incluem OpenAI, LangChain, LangGraph, LangSmith e Gradio. O produto final é um chatbot de ponta a ponta, projetado para executar essas tarefas, com o LangSmith usado para monitorar o desempenho dos agentes.
 
 ---
 
-# AgentGraph: Intelligent SQL-agent Q&A and RAG System for Chatting with Multiple Databases
+## Explicação do vídeo:
+Uma explicação detalhada do projeto está disponível no seguinte vídeo do YouTube:
 
-This project demonstrates how to build an agentic system using Large Language Models (LLMs) that can interact with multiple databases and utilize various tools. It highlights the use of SQL agents to efficiently query large databases. The key frameworks used in this project include OpenAI, LangChain, LangGraph, LangSmith, and Gradio. The end product is an end-to-end chatbot, designed to perform these tasks, with LangSmith used to monitor the performance of the agents.
-
----
-
-## Video Explanation: 
-A detailed explanation of the project is available in the following YouTube video:
-
-Automating LLM Agents to Chat with Multiple/Large Databases (Combining RAG and SQL Agents): [Link](https://youtu.be/xsCedrNP9w8?si=v-3k-BoDky_1IRsg)
+Automatizando agentes LLM para conversar com vários/grandes bancos de dados (combinando agentes RAG e SQL): [Link](https://youtu.be/xsCedrNP9w8?si=v-3k-BoDky_1IRsg)
 
 ---
 
-## Requirements
+## Requisitos
 
-- **Operating System:** Linux or Windows (Tested on Windows 11 with Python 3.9.11)
-- **OpenAI API Key:** Required for GPT functionality.
-- **Tavily Credentials:** Required for search tools (Free from your Tavily profile).
-- **LangChain Credentials:** Required for LangSmith (Free from your LangChain profile).
-- **Dependencies:** The necessary libraries are provided in `requirements.txt` file.
+- **Sistema operacional:** Linux ou Windows (testado no Windows 11 com Python 3.9.11)
+- **Chave de API OpenAI:** necessária para a funcionalidade GPT.
+- **Credenciais Tavily:** necessárias para ferramentas de pesquisa (grátis no seu perfil Tavily).
+- **Credenciais LangChain:** necessárias para LangSmith (grátis no seu perfil LangChain).
+- **Dependências:** as bibliotecas necessárias são fornecidas no arquivo `requirements.txt`.
 ---
 
-## Installation and Execution
+## Instalação e execução
 
-To set up the project, follow these steps:
+Para configurar o projeto, siga estas etapas:
 
-1. Clone the repository:
-   ```bash
-   git clone <repo_address>
-   ```
-2. Install Python and create a virtual environment:
-   ```bash
-   python -m venv venv
-   ```
-3. Activate the virtual environment:
-   - On Windows:
-     ```bash
-     venv\Scripts\activate
-     ```
-   - On Linux/macOS:
-     ```bash
-     source venv/bin/activate
-     ```
-4. Install the required dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-5. Download the travel sql database from this link and paste it into the `data` folder.
+1. Clone o repositório:
+```bash
+git clone <repo_address>
+```
+2. Instale o Python e crie um ambiente virtual:
+```bash
+python -m venv venv
+```
+3. Ative o ambiente virtual:
+- No Windows:
+```bash
+venv\Scripts\activate
+```
+- No Linux/macOS:
+```bash
+source venv/bin/activate
+```
+4. Instale as dependências necessárias:
+```bash
+pip install -r requirements.txt
+```
+5. Baixe o banco de dados SQL do Travel neste link e cole-o na pasta `data`.
 
-6. Download the chinook SQL database from this link and paste it into the `data` folder.
+6. Baixe o banco de dados SQL do Chinook neste link e cole-o na pasta `data`.
 
-7. Prepare the `.env` file and add your `OPEN_AI_API_KEY`, `TAVILY_API_KEY`, and `LANGCHAIN_API_KEY`.
+7. Prepare o arquivo `.env` e adicione seu `OPEN_AI_API_KEY`, `TAVILY_API_KEY` e `LANGCHAIN_API_KEY`.
 
-8. Run `prepare_vector_db.py` module once to prepare both vector databases.
-   ```bash
-   python src\prepare_vector_db.py
-   ```
-9. Run the app:
-   ```bash
-   python src\app.py
-   ```
-Open the Gradio URL generated in the terminal and start chatting.
+8. Execute o módulo `prepare_vector_db.py` uma vez para preparar ambos os bancos de dados de vetores.
+```bash
+python src\prepare_vector_db.py
+```
+9. Execute o aplicativo:
+```bash
+python src\app.py
+```
+Abra a URL do Gradio gerada no terminal e comece a conversar.
 
-*Sample questions are available in `sample_questions.txt`.*
-
----
-
-### Using Your Own Database
-
-To use your own data:
-1. Place your data in the `data` folder.
-2. Update the configurations in `tools_config.yml`.
-3. Load the configurations in `src\agent_graph\load_tools_config.py`.
-
-For unstructured data using Retrieval-Augmented Generation (RAG):
-1. Run the following command with your data directory's configuration:
-   ```bash
-   python src\prepare_vector_db.py
-   ```
-
-All configurations are managed through YAML files in the `configs` folder, loaded by `src\chatbot\load_config.py` and `src\agent_graph\load_tools_config.py`. These modules are used for a clean distribution of configurations throughout the project.
-
-Once your databases are ready, you can either connect the current agents to the databases or create new agents. More details can be found in the accompanying YouTube video.
+*Perguntas de exemplo estão disponíveis em `sample_questions.txt`.*
 
 ---
 
-## Project Schemas
+### Usando seu próprio banco de dados
 
-### High-level overview
+Para usar seus próprios dados:
+1. Coloque seus dados na pasta `data`.
+2. Atualize as configurações em `tools_config.yml`.
+3. Carregue as configurações em `src\agent_graph\load_tools_config.py`.
+
+Para dados não estruturados usando Retrieval-Augmented Generation (RAG):
+1. Execute o seguinte comando com a configuração do seu diretório de dados:
+```bash
+python src\prepare_vector_db.py
+```
+
+Todas as configurações são gerenciadas por meio de arquivos YAML na pasta `configs`, carregada por `src\chatbot\load_config.py` e `src\agent_graph\load_tools_config.py`. Esses módulos são usados ​​para uma distribuição limpa de configurações em todo o projeto.
+
+Quando seus bancos de dados estiverem prontos, você pode conectar os agentes atuais aos bancos de dados ou criar novos agentes. Mais detalhes podem ser encontrados no vídeo do YouTube que acompanha.
+
+---
+
+## Esquemas de Projeto
+
+### Visão geral de alto nível
 
 <div align="center">
-  <img src="images/high-level.png" alt="high-level">
+<img src="images/high-level.png" alt="high-level">
 </div>
 
-### Detailed Schema
+### Esquema Detalhado
 
 <div align="center">
-  <img src="images/detailed_schema.png" alt="detailed_schema">
+<img src="images/detailed_schema.png" alt="detailed_schema">
 </div>
 
-### Graph Schema
+### Esquema de Gráfico
 
 <div align="center">
-  <img src="images/graph_image.png" alt="graph_image">
+<img src="images/graph_image.png" alt="graph_image">
 </div>
 
-### SQL-agent for large databases strategies
+### Agente SQL para estratégias de grandes bancos de dados
 
 <div align="center">
-  <img src="images/large_db_strategy.png" alt="large_db_strategy">
-</div>
-
----
-
-## Chatbot User Interface
-
-<div align="center">
-  <img src="images/UI.png" alt="ChatBot UI">
+<img src="images/large_db_strategy.png" alt="large_db_strategy">
 </div>
 
 ---
 
-## LangSmith Monitoring System
+## Interface de Usuário do Chatbot
 
 <div align="center">
-  <img src="images/langsmith.png" alt="langsmith">
+<img src="images/UI.png" alt="ChatBot UI">
 </div>
 
 ---
 
-## Databases Used
+## Sistema de monitoramento LangSmith
 
-- **Travel SQL Database:** [Kaggle Link](https://www.kaggle.com/code/mpwolke/airlines-sqlite)
-- **Chinook SQL Database:** [Sample Database](https://database.guide/2-sample-databases-sqlite/)
+<div align="center">
+<img src="images/langsmith.png" alt="langsmith">
+</div>
+
+---
+
+## Bancos de dados usados
+
+- **Banco de dados SQL de viagens:** [Link do Kaggle](https://www.kaggle.com/code/mpwolke/airlines-sqlite)
+- **Banco de dados SQL Chinook:** [Banco de dados de amostra](https://database.guide/2-sample-databases-sqlite/)
 - **stories VectorDB**
-- **Airline Policy FAQ VectorDB**
+- **Perguntas frequentes sobre política de companhias aéreas VectorDB**
 ---
 
-## Key Frameworks and Libraries
+## Principais estruturas e bibliotecas
 
-- **LangChain:** [Introduction](https://python.langchain.com/docs/get_started/introduction)
+- **LangChain:** [Introdução](https://python.langchain.com/docs/get_started/introduction)
 - **LangGraph**
 - **LangSmith**
-- **Gradio:** [Documentation](https://www.gradio.app/docs/interface)
-- **OpenAI:** [Developer Quickstart](https://platform.openai.com/docs/quickstart?context=python)
+- **Gradio:** [Documentação](https://www.gradio.app/docs/interface)
+- **OpenAI:** [Início rápido do desenvolvedor](https://platform.openai.com/docs/quickstart?context=python)
 - **Tavily Search**
 ---

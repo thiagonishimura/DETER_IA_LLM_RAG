@@ -13,19 +13,19 @@ class LoadToolsConfig:
         with open(here("configs/tools_config.yml")) as cfg:
             app_config = yaml.load(cfg, Loader=yaml.FullLoader)
 
-        # Set environment variables
+        # Definir variáveis ​​de ambiente
         os.environ['OPENAI_API_KEY'] = os.getenv("OPENAI_API_KEY")
         os.environ['TAVILY_API_KEY'] = os.getenv("TAVILY_API_KEY")
 
-        # Primary agent
+        # Agente primário
         self.primary_agent_llm = app_config["primary_agent"]["llm"]
         self.primary_agent_llm_temperature = app_config["primary_agent"]["llm_temperature"]
 
-        # Internet Search config
+        # Configuração de pesquisa na Internet
         self.tavily_search_max_results = int(
             app_config["tavily_search_api"]["tavily_search_max_results"])
 
-        # Swiss Airline Policy RAG configs
+        # Configurações RAG Swiss Airline Policy
         self.policy_rag_llm = app_config["swiss_airline_policy_rag"]["llm"]
         self.policy_rag_llm_temperature = float(
             app_config["swiss_airline_policy_rag"]["llm_temperature"])
@@ -39,7 +39,7 @@ class LoadToolsConfig:
         self.policy_rag_chunk_overlap = app_config["swiss_airline_policy_rag"]["chunk_overlap"]
         self.policy_rag_collection_name = app_config["swiss_airline_policy_rag"]["collection_name"]
 
-        # Stories RAG configs
+        # Configurações RAG Stories
         self.stories_rag_llm = app_config["stories_rag"]["llm"]
         self.stories_rag_llm_temperature = float(
             app_config["stories_rag"]["llm_temperature"])
@@ -53,21 +53,21 @@ class LoadToolsConfig:
         self.stories_rag_chunk_overlap = app_config["stories_rag"]["chunk_overlap"]
         self.stories_rag_collection_name = app_config["stories_rag"]["collection_name"]
 
-        # Travel SQL Agent configs
+        # Configurações Travel SQL Agent
         self.travel_sqldb_directory = str(here(
             app_config["travel_sqlagent_configs"]["travel_sqldb_dir"]))
         self.travel_sqlagent_llm = app_config["travel_sqlagent_configs"]["llm"]
         self.travel_sqlagent_llm_temperature = float(
             app_config["travel_sqlagent_configs"]["llm_temperature"])
 
-        # Chinook SQL agent configs
+        # Configurações Chinook SQL agent
         self.chinook_sqldb_directory = str(here(
             app_config["chinook_sqlagent_configs"]["chinook_sqldb_dir"]))
         self.chinook_sqlagent_llm = app_config["chinook_sqlagent_configs"]["llm"]
         self.chinook_sqlagent_llm_temperature = float(
             app_config["chinook_sqlagent_configs"]["llm_temperature"])
         
-        # PostgreSQL agent configs
+        # Configurações PostgreSQL agent
         self.postgres_db_type = app_config["postgres_sqlagent_configs"]["db_type"]
         self.postgres_db_host = app_config["postgres_sqlagent_configs"]["db_host"]
         self.postgres_db_port = app_config["postgres_sqlagent_configs"]["db_port"]
@@ -77,6 +77,6 @@ class LoadToolsConfig:
         self.postgres_sqlagent_llm = app_config["postgres_sqlagent_configs"]["llm"]
         self.postgres_sqlagent_llm_temperature = float(app_config["postgres_sqlagent_configs"]["llm_temperature"])
 
-        # Graph configs
+        # Configurações Graph
         self.thread_id = str(
             app_config["graph_configs"]["thread_id"])

@@ -7,16 +7,17 @@ postgres_agent = PostgresAgent()
 
 with gr.Blocks() as demo:
     with gr.Tabs():
-        with gr.TabItem("AgentGraph"):
+        with gr.TabItem("DETER Amazônia - Agouti Robot"):
             # First ROW
             with gr.Row() as row_one:
                 chatbot = gr.Chatbot(
                     [],
+                    value="Agouti Robot",
                     elem_id="chatbot",
                     bubble_full_width=False,
                     height=500,
                     avatar_images=(
-                        ("images/AI_RT.png"), "images/openai.png"),
+                        ("images/logo_deter_amazonia.jpg"), "images/agouti_logo.png"),
                 )
                 chatbot.like(UISettings.feedback, None, None)
             # SECOND ROW
@@ -24,13 +25,13 @@ with gr.Blocks() as demo:
                 input_txt = gr.Textbox(
                     lines=3,
                     scale=8,
-                    placeholder="Enter text and press enter, or upload PDF files",
+                    placeholder="Digite um texto e pressione ENTER, ou envie um PDF",
                     container=False,
                 )
             # Third ROW
             with gr.Row() as row_two:
-                text_submit_btn = gr.Button(value="Submit text")
-                clear_button = gr.ClearButton([input_txt, chatbot])
+                text_submit_btn = gr.Button(value="Enviar texto")
+                clear_button = gr.ClearButton([input_txt, chatbot], value="Limpar texto")
             # Process
             txt_msg = input_txt.submit(fn=ChatBot.respond,
                                        inputs=[chatbot, input_txt],

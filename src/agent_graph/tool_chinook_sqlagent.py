@@ -14,23 +14,23 @@ TOOLS_CFG = LoadToolsConfig()
 
 class Table(BaseModel):
     """
-    Represents a table in the SQL database.
+    Representa uma tabela no banco de dados SQL.
 
-    Attributes:
-        name (str): The name of the table in the SQL database.
+    Attributos:
+        name (str): O nome da tabela no banco de dados SQL.
     """
 
-    name: str = Field(description="Name of table in SQL database.")
+    name: str = Field(description="O nome da tabela no banco de dados SQL.")
 
 
 def get_tables(categories: List[Table]) -> List[str]:
-    """Maps category names to corresponding SQL table names.
+    """Mapeia nomes de categorias para nomes de tabelas SQL correspondentes.
 
-    Args:
-        categories (List[Table]): A list of `Table` objects representing different categories.
+    Argumentos:
+        categories (List[Table]): Uma lista de objetos `Table` representando diferentes categorias.
 
-    Returns:
-        List[str]: A list of SQL table names corresponding to the provided categories.
+    Retornos:
+        List[str]: Uma lista de nomes de tabelas SQL correspondentes às categorias fornecidas.
     """
     tables = []
     for category in categories:
@@ -54,41 +54,41 @@ def get_tables(categories: List[Table]) -> List[str]:
 
 class ChinookSQLAgent:
     """
-    A specialized SQL agent that interacts with the Chinook SQL database using an LLM (Large Language Model).
+    Um agente SQL especializado que interage com o banco de dados Chinook SQL usando um LLM (Large Language Model).
 
-    The agent handles SQL queries by mapping user questions to relevant SQL tables based on categories like "Music"
-    and "Business". It uses an extraction chain to determine relevant tables based on the question and then
-    executes queries against the database using the appropriate tables.
+    O agente lida com consultas SQL mapeando as perguntas do usuário para tabelas SQL relevantes com base em categorias como "Música"
+    e "Negócios". Ele usa uma cadeia de extração para determinar tabelas relevantes com base na pergunta e depois
+    executa consultas no banco de dados usando as tabelas apropriadas.
 
-    Attributes:
-        sql_agent_llm (ChatOpenAI): The language model used for interpreting and interacting with the database.
-        db (SQLDatabase): The SQL database object, representing the Chinook database.
-        full_chain (Runnable): A chain of operations that maps user questions to SQL tables and executes queries.
+    Attributos:
+        sql_agent_llm (ChatOpenAI): O modelo de linguagem usado para interpretar e interagir com o banco de dados.
+        db (SQLDatabase): O objeto de banco de dados SQL, representando o banco de dados Chinook.
+        full_chain (Runnable): Uma cadeia de operações que mapeia as perguntas do usuário para tabelas SQL e executa consultas.
 
-    Methods:
-        __init__: Initializes the agent by setting up the LLM, connecting to the SQL database, and creating query chains.
+    Metodos:
+        __init__: Inicializa o agente configurando o LLM, conectando-se ao banco de dados SQL e criando cadeias de consulta.
 
-    Args:
-        sqldb_directory (str): The directory where the Chinook SQLite database file is located.
-        llm (str): The name of the LLM model to use (e.g., "gpt-3.5-turbo").
-        llm_temperature (float): The temperature setting for the LLM, controlling the randomness of responses.
+    Argumentos:
+        sqldb_directory (str): O diretório onde o arquivo de banco de dados Chinook SQLite está localizado.
+        llm (str): O nome do modelo LLM a ser usado (por exemplo, "gpt-3.5-turbo").
+        llm_temperature (float): A configuração de temperatura para o LLM, controlando a aleatoriedade das respostas.
     """
 
     def __init__(self, sqldb_directory: str, llm: str, llm_temerature: float) -> None:
-        """Initializes the ChinookSQLAgent with the LLM and database connection.
+        """Inicializa o ChinookSQLAgent com o LLM e a conexão com o banco de dados.
 
-        Args:
-            sqldb_directory (str): The directory path to the SQLite database file.
-            llm (str): The LLM model identifier (e.g., "gpt-3.5-turbo").
-            llm_temerature (float): The temperature value for the LLM, determining the randomness of the model's output.
+        Argumentos:
+            sqldb_directory (str): O caminho do diretório para o arquivo de banco de dados SQLite.
+            llm (str): O identificador do modelo LLM (por exemplo, "gpt-3.5-turbo").
+            llm_temerature (float): O valor da temperatura para o LLM, determinando a aleatoriedade da saída do modelo.
         """
         self.sql_agent_llm = ChatOpenAI(
             model=llm, temperature=llm_temerature)
 
         self.db = SQLDatabase.from_uri(f"sqlite:///{sqldb_directory}")
         print(self.db.get_usable_table_names())
-        category_chain_system = """Return the names of the SQL tables that are relevant to the user question. \
-        The tables are:
+        category_chain_system = """Retornae os nomes das tabelas SQL relevantes para a pergunta do usuário. \
+        TAs tabelas são:
 
         Music
         Business"""

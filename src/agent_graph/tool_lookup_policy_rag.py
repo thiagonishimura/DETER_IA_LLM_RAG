@@ -8,41 +8,41 @@ TOOLS_CFG = LoadToolsConfig()
 
 class SwissAirlinePolicyRAGTool:
     """
-    A tool for retrieving relevant Swiss Airline policy documents using a 
-    Retrieval-Augmented Generation (RAG) approach with vector embeddings.
+    Uma ferramenta para recuperar documentos relevantes da política da Swiss Airline usando um 
+    Abordagem de geração aumentada de recuperação (RAG) com incorporações de vetores.
 
-    This tool uses a pre-trained OpenAI embedding model to transform queries into 
-    vector representations. These vectors are then used to query a Chroma-based 
-    vector database (persisted on disk) to retrieve the top-k most relevant 
-    documents or entries from a specific collection, such as Swiss Airline policies.
+    Esta ferramenta usa um modelo de incorporação OpenAI pré-treinado para transformar consultas em 
+    representações vetoriais. Esses vetores são então usados ​​para consultar um arquivo baseado em Chroma. 
+    banco de dados vetorial (persistido no disco) para recuperar os top-k mais relevantes 
+    documentos ou entradas de uma coleção específica, como apólices da Swiss Airline.
 
-    Attributes:
-        embedding_model (str): The name of the OpenAI embedding model used for 
-            generating vector representations of the queries.
-        vectordb_dir (str): The directory where the Chroma vector database is 
-            persisted on disk.
-        k (int): The number of top-k nearest neighbors (most relevant documents) 
-            to retrieve from the vector database.
-        vectordb (Chroma): The Chroma vector database instance connected to the 
-            specified collection and embedding model.
+    Atributos:
+        embedding_model (str): O nome do modelo de incorporação OpenAI usado para 
+            gerando representações vetoriais das consultas.
+        vectordb_dir (str): O diretório onde está o banco de dados vetorial Chroma 
+            persistiu no disco.
+        k (int): O número dos k vizinhos mais próximos (documentos mais relevantes) 
+            para recuperar do banco de dados vetorial.
+        vectordb (Chroma): A instância do banco de dados vetorial Chroma conectada ao 
+            coleção especificada e modelo de incorporação.
 
-    Methods:
-        __init__: Initializes the tool by setting up the embedding model, 
-            vector database, and retrieval parameters.
+    Metodos:
+        __init__: Inicializa a ferramenta configurando o modelo de incorporação, 
+            banco de dados vetorial e parâmetros de recuperação.
     """
 
     def __init__(self, embedding_model: str, vectordb_dir: str, k: int, collection_name: str) -> None:
         """
-        Initializes the SwissAirlinePolicyRAGTool with the necessary configuration.
+        Inicializa o SwissAirlinePolicyRAGTool com a configuração necessária.
 
-        Args:
-            embedding_model (str): The name of the embedding model (e.g., "text-embedding-ada-002")
-                used to convert queries into vector representations.
-            vectordb_dir (str): The directory path where the Chroma vector database is stored 
-                and persisted on disk.
-            k (int): The number of nearest neighbor documents to retrieve based on query similarity.
-            collection_name (str): The name of the collection inside the vector database that holds 
-                the Swiss Airline policy documents.
+        Argumentos:
+            embedding_model (str): O nome do modelo de incorporação (por exemplo, "text-embedding-ada-002")
+                usado para converter consultas em representações vetoriais.
+            vectordb_dir (str): O caminho do diretório onde o banco de dados vetorial Chroma está armazenado 
+                e persistiu no disco.
+            k (int): O número de documentos vizinhos mais próximos a serem recuperados com base na similaridade da consulta.
+            nome_coleção (str): O nome da coleção dentro do banco de dados vetorial que contém 
+                os documentos da política da Swiss Airline.
         """
         self.embedding_model = embedding_model
         self.vectordb_dir = vectordb_dir
@@ -58,7 +58,7 @@ class SwissAirlinePolicyRAGTool:
 
 @tool
 def lookup_swiss_airline_policy(query: str) -> str:
-    """Consult the company policies to check whether certain options are permitted."""
+    """Consulte as políticas da empresa para verificar se determinadas opções são permitidas."""
     rag_tool = SwissAirlinePolicyRAGTool(
         embedding_model=TOOLS_CFG.policy_rag_embedding_model,
         vectordb_dir=TOOLS_CFG.policy_rag_vectordb_directory,
