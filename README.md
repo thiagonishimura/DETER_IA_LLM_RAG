@@ -28,7 +28,7 @@ Para configurar o projeto, siga estas etapas:
 
 1. Clone o repositório:
 ```bash
-git clone <repo_address>
+git clone https://github.com/thiagonishimura/DETER_IA_LLM_RAG.git
 ```
 2. Instale o Python e crie um ambiente virtual:
 ```bash
