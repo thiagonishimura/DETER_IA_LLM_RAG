@@ -6,6 +6,7 @@ from agent_graph.tool_travel_sqlagent import query_travel_sqldb
 from agent_graph.tool_lookup_policy_rag import lookup_swiss_airline_policy
 from agent_graph.tool_tavily_search import load_tavily_search_tool
 from agent_graph.tool_stories_rag import lookup_stories
+from agent_graph.tool_auto_pdi_deter_rag import auto_pdi_deter
 from agent_graph.load_tools_config import LoadToolsConfig
 from agent_graph.agent_backend import State, BasicToolNode, route_tools, plot_agent_schema
 
@@ -54,6 +55,7 @@ def build_graph():
     tools = [search_tool,
              lookup_swiss_airline_policy,
              lookup_stories,
+             auto_pdi_deter,
              query_travel_sqldb,
              query_chinook_sqldb,
              ]
@@ -70,6 +72,7 @@ def build_graph():
             search_tool,
             lookup_swiss_airline_policy,
             lookup_stories,
+            auto_pdi_deter,
             query_travel_sqldb,
             query_chinook_sqldb,
         ])

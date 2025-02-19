@@ -11,7 +11,7 @@ swiss_airline_policy_rag:
   embedding_model: text-embedding-3-small  # Modelo de embeddings usado para indexação
   chunk_size: 500  # Tamanho dos pedaços dos documentos
   chunk_overlap: 100  # Sobreposição entre os pedaços
-  k: 2  # Número de documentos relevantes a serem recuperados
+  k: 3 # Número de documentos relevantes a serem recuperados
 
 stories_rag:
   unstructured_docs: "data/unstructured_docs/stories"  # Caminho para documentos não estruturados
@@ -22,13 +22,24 @@ stories_rag:
   embedding_model: text-embedding-3-small  # Modelo de embeddings usado para indexação
   chunk_size: 500  # Tamanho dos pedaços dos documentos
   chunk_overlap: 100  # Sobreposição entre os pedaços
-  k: 2 # Número de documentos relevantes a serem recuperados
+  k: 3 # Número de documentos relevantes a serem recuperados
+
+auto_pdi_deter_rag:
+  unstructured_docs: "data/unstructured_docs/auto_pdi_deter"  # Caminho para documentos não estruturados
+  vectordb: "data/auto_pdi_deter_vectordb"  # Banco de dados vetorial para armazenar embeddings
+  collection_name: deter-rag-chroma  # Nome da coleção no banco de vetores
+  llm: gpt-4o-mini
+  llm_temperature: 0.0
+  embedding_model: text-embedding-3-small  # Modelo de embeddings usado para indexação
+  chunk_size: 500  # Tamanho dos pedaços dos documentos
+  chunk_overlap: 100  # Sobreposição entre os pedaços
+  k: 3 # Número de documentos relevantes a serem recuperados
 
 travel_sqlagent_configs:
   travel_sqldb_dir: "data/travel.sqlite"  # Caminho para o banco de dados SQLite de viagens
   llm: "gpt-3.5-turbo"  # Modelo de linguagem usado para gerar consultas SQL
   llm_temperature: 0.0  # Determinismo total (respostas consistentes)
-  
+
 chinook_sqlagent_configs:
   chinook_sqldb_dir: "data/Chinook.db"  # Caminho para o banco de dados SQLite Chinook (exemplo de música)
   llm: "gpt-3.5-turbo"

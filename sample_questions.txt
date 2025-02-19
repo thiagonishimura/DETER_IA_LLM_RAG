@@ -1,28 +1,28 @@
-Intro:
+Introdução:
 
-In the stories, who is lily?
+Em stories, quem é Lily?
 
-Based on the airline policy, do I need to reconfirm my flight?
+Com base na política da companhia aérea, preciso reconfirmar meu voo?
 
-Give me the table names in travel database
+Me dê os nomes das tabelas no banco de dados de viagens
 
-Give me the table names in chinook database
+Me dê os nomes das tabelas no banco de dados Chinook
 
-Give me the link of Trump and Harris debate on youtube
-========================================================================
-Final test:
+Me dê o link do debate entre Trump e Harris no YouTube
+=========================================================================
+Teste final:
 
-In the stories, who is fred?
+Em stories, quem é Fred?
 
-Based on the airline policy, can I cancel my ticket 10 hours before the flight?
+Com base na política da companhia aérea, posso cancelar minha passagem 10 horas antes do voo?
 
-Is there any flight available on the travel database that goes from CDG to BSL?
+Há algum voo disponível no banco de dados de viagens que vá de CDG para BSL?
 
-In chinook DB, list the total sales per country. Which country's customers spent the most?
+No banco de dados Chinook, liste o total de vendas por país. Os clientes de qual país gastaram mais?
 
-What are all the genres of Alanis Morisette songs?
+Quais são todos os gêneros das músicas de Alanis Morisette?
 
-Give me a couple of his albums' names
+Dê-me alguns nomes de álbuns contidas no banco.
 
-Give me the link to some websites for langgraph tutorial
-========================================================================
+Dê-me o link para alguns sites para tutorial de langgraph
+============================================================================

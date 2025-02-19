@@ -83,7 +83,7 @@ class PrepareVectorDB:
         if not os.path.exists(here(self.vectordb_dir)):
             # Se não existir, crie o diretório e crie os embeddings
             os.makedirs(here(self.vectordb_dir))
-            print(f"Directory '{self.vectordb_dir}' was created.")
+            print(f"Directory '{self.vectordb_dir}' Foi criado.")
 
             file_list = os.listdir(here(self.doc_dir))
             docs = [PyPDFLoader(self.path_maker(
@@ -101,11 +101,11 @@ class PrepareVectorDB:
                 embedding=OpenAIEmbeddings(model=self.embedding_model),
                 persist_directory=str(here(self.vectordb_dir))
             )
-            print("VectorDB is created and saved.")
-            print("Number of vectors in vectordb:",
+            print("VectorDB foi criado e salvo.")
+            print("Número de vetores em vectordb:",
                   vectordb._collection.count(), "\n\n")
         else:
-            print(f"Directory '{self.vectordb_dir}' already exists.")
+            print(f"O diretório '{self.vectordb_dir}' já existe.")
 
 
 if __name__ == "__main__":
@@ -115,7 +115,7 @@ if __name__ == "__main__":
     with open(here("configs/tools_config.yml")) as cfg:
         app_config = yaml.load(cfg, Loader=yaml.FullLoader)
 
-    # Remova o comentário das seguintes configurações para executar o documento de swiss airline policy
+    # Documento de swiss airline policy
     chunk_size = app_config["swiss_airline_policy_rag"]["chunk_size"]
     chunk_overlap = app_config["swiss_airline_policy_rag"]["chunk_overlap"]
     embedding_model = app_config["swiss_airline_policy_rag"]["embedding_model"]
@@ -133,13 +133,31 @@ if __name__ == "__main__":
 
     prepare_db_instance.run()
 
-    # Remova o comentário das seguintes configurações para executar o documento de stories
+    # Documento de stories
     chunk_size = app_config["stories_rag"]["chunk_size"]
     chunk_overlap = app_config["stories_rag"]["chunk_overlap"]
     embedding_model = app_config["stories_rag"]["embedding_model"]
     vectordb_dir = app_config["stories_rag"]["vectordb"]
     collection_name = app_config["stories_rag"]["collection_name"]
     doc_dir = app_config["stories_rag"]["unstructured_docs"]
+
+    prepare_db_instance = PrepareVectorDB(
+        doc_dir=doc_dir,
+        chunk_size=chunk_size,
+        chunk_overlap=chunk_overlap,
+        embedding_model=embedding_model,
+        vectordb_dir=vectordb_dir,
+        collection_name=collection_name)
+
+    prepare_db_instance.run()
+
+# Documento de auto_pdi_deter
+    chunk_size = app_config["auto_pdi_deter_rag"]["chunk_size"]
+    chunk_overlap = app_config["auto_pdi_deter_rag"]["chunk_overlap"]
+    embedding_model = app_config["auto_pdi_deter_rag"]["embedding_model"]
+    vectordb_dir = app_config["auto_pdi_deter_rag"]["vectordb"]
+    collection_name = app_config["auto_pdi_deter_rag"]["collection_name"]
+    doc_dir = app_config["auto_pdi_deter_rag"]["unstructured_docs"]
 
     prepare_db_instance = PrepareVectorDB(
         doc_dir=doc_dir,

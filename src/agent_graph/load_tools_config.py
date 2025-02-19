@@ -53,6 +53,20 @@ class LoadToolsConfig:
         self.stories_rag_chunk_overlap = app_config["stories_rag"]["chunk_overlap"]
         self.stories_rag_collection_name = app_config["stories_rag"]["collection_name"]
 
+        # Configurações RAG auto_pdi_deter
+        self.auto_pdi_deter_rag_llm = app_config["auto_pdi_deter_rag"]["llm"]
+        self.auto_pdi_deter_rag_llm_temperature = float(
+            app_config["auto_pdi_deter_rag"]["llm_temperature"])
+        self.auto_pdi_deter_rag_embedding_model = app_config["auto_pdi_deter_rag"]["embedding_model"]
+        self.auto_pdi_deter_rag_vectordb_directory = str(here(
+            app_config["auto_pdi_deter_rag"]["vectordb"]))  # needs to be strin for summation in chromadb backend: self._settings.require("persist_directory") + "/chroma.sqlite3"
+        self.auto_pdi_deter_unstructured_docs_directory = str(here(
+            app_config["auto_pdi_deter_rag"]["unstructured_docs"]))
+        self.auto_pdi_deter_rag_k = app_config["auto_pdi_deter_rag"]["k"]
+        self.auto_pdi_deter_rag_chunk_size = app_config["auto_pdi_deter_rag"]["chunk_size"]
+        self.auto_pdi_deter_rag_chunk_overlap = app_config["auto_pdi_deter_rag"]["chunk_overlap"]
+        self.auto_pdi_deter_rag_collection_name = app_config["auto_pdi_deter_rag"]["collection_name"]
+
         # Configurações Travel SQL Agent
         self.travel_sqldb_directory = str(here(
             app_config["travel_sqlagent_configs"]["travel_sqldb_dir"]))
