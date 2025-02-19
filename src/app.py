@@ -1,9 +1,14 @@
 import gradio as gr
 from chatbot.chatbot_backend import ChatBot
 from utils.ui_settings import UISettings
-from agent_graph.postgres_agent import PostgresAgent
+from agent_graph.tool_postgres_sqlagent import PostgresAgent
 
-postgres_agent = PostgresAgent()
+agent = PostgresAgent()
+
+# Testando uma query
+query = "SELECT version();"
+result = agent.execute_query(query)
+print(f"Resultado da query: {result}")
 
 with gr.Blocks() as demo:
     with gr.Tabs():
